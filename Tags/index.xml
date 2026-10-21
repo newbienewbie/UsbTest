@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+	<Channel name="S7-1" driver="S7" >
+		<IpAddr>localhost</IpAddr>
+		<Rack>0</Rack>
+		<Slot>1</Slot>
+	</Channel>
+
+	<Channel name="file" driver="SimpleFiles">
+		<BaseDir>.</BaseDir>
+	</Channel>
+
+	<TagGrp name="entry" isEntry="true" isEnabled="true" scanInterval="1" channel="S7-1">
+
+		<TagGrp name="通用状态" channel="S7-1">
+			<TagCbnt name="PLC" address="DB200.100" access="RO">
+				<Tag name="心跳请求" address="$$100.0" type="BIT" access="RO" />
+				<Tag name="状态码" address="$$102.0" type="INT16" access="RW" endian="BigEndian" />
+			</TagCbnt>
+			<TagCbnt name="MST" address="DB201.100" access="R1W">
+				<Tag name="心跳响应" address="$$100.0" type="BIT" access="R1W" />
+				<Tag name="扫描周期" address="$$102.0" type="FLOAT" access="R1W" />
+			</TagCbnt>
+		</TagGrp>
+
+		<!-- SimpleFiles 通道的连接是空操作 -->
+		<TagGrp name="tag-as-file-demo" channel="file">
+			<Tag name="测试1" address="bb" type="BYTE" access="R1W" autoCreateFile="true" />
+			<Tag name="测试2" address="cc" type="MyJson" access="R1W" autoCreateFile="true" />
+		</TagGrp>
+
+		<!-- additional TagGrp elements can be added here -->
+	</TagGrp>
+
+
+</Project>
