@@ -1,4 +1,4 @@
-﻿using StdUnit.Tags;
+using StdUnit.Tags;
 using StdUnit.Tags.R3;
 using R3;
 using System.Windows;
@@ -39,6 +39,8 @@ public partial class MainWindow : Window, IDisposable
         var ack = entry.SelectTag(TagsPathDefines.心跳响应);
         var interval = entry.SelectTag(TagsPathDefines.扫描周期);
 
+        var usbTag = tags.SelectTag("扫码枪/3#");
+
         var d = new CompositeDisposable();
         req.Watch()
             .ObserveOnDispatcher(this.Dispatcher)
@@ -66,6 +68,16 @@ public partial class MainWindow : Window, IDisposable
             {
                 var newvalue = evt.NewValue;
                 this.txtInterval.Text = newvalue?.ToString();
+            })
+            .AddTo(d);
+
+        usbTag.Watch()
+            .ObserveOnDispatcher(this.Dispatcher)
+            .Subscribe(evt =>
+            {
+                var newvalue = evt.NewValue;
+                this.txtUsb.Text = newvalue?.ToString();
+                this.txtAck.Foreground = newvalue is true ? Brushes.Green : Brushes.Black;
             })
             .AddTo(d);
         return d;

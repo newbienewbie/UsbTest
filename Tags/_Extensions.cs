@@ -1,9 +1,10 @@
+using Microsoft.Extensions.DependencyInjection;
+using MudBlazor.Services;
 using StdUnit.Tags;
 using StdUnit.Tags.BlazorLib;
 using StdUnit.Tags.S7;
 using StdUnit.Tags.SimpleFiles;
-using Microsoft.Extensions.DependencyInjection;
-using MudBlazor.Services;
+using StdUnit.Tags.WinUsbKeyboardCodeScanners;
 
 namespace usbtest.Tags;
 
@@ -29,7 +30,8 @@ public static class ServiceCollectionExtensions
                 ) 
                 // ... 可以以类似手法注册其它特化的节点
                 // 内置的简单文件支持
-                .AddSimpleFilesDirectTagBuilder();
+                .AddSimpleFilesDirectTagBuilder()
+                .AddUsbKeyboardCodeScannerSupport();
         });
 
         // blazor Tags/monitor 

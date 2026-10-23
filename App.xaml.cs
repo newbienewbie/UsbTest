@@ -1,4 +1,4 @@
-﻿using StdUnit.Tags;
+using StdUnit.Tags;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -33,7 +33,7 @@ public partial class App : Application
         this.Ctrl = this.Root.GetRequiredService<ITagsProjectCtrl>();
         this.Ctrl.OnStartingException = ex =>
         {
-            MessageBox.Show($"Tags处理启动异常:{ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            //MessageBox.Show($"Tags处理启动异常:{ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             return Task.FromResult(true);
         };
 
@@ -72,7 +72,7 @@ public partial class App : Application
                 proj.RunnerCrashed += (grp, ch, ex) =>
                 {
                     logger.LogError(ex, "Tags处理异常,grp={grpName}", grp.TagName());
-                    MessageBox.Show($"Tags处理发生异常：{ex.Message}");
+                    //MessageBox.Show($"Tags处理发生异常：{ex.Message}");
                     return Task.CompletedTask;
                 };
 

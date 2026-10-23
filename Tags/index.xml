@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project>
+<Project xmlns:usbkbcs="tags:usbkeyboardcodescanner">
 	<Channel name="S7-1" driver="S7" >
 		<IpAddr>localhost</IpAddr>
 		<Rack>0</Rack>
@@ -9,6 +9,17 @@
 	<Channel name="file" driver="SimpleFiles">
 		<BaseDir>.</BaseDir>
 	</Channel>
+	<Channel name="USB-3#" driver="UsbKeyboardCodeScanner">
+		<usbkbcs:VendorId>0x0581</usbkbcs:VendorId>
+		<usbkbcs:ProductId>0x011A</usbkbcs:ProductId>
+		<usbkbcs:InstanceId><![CDATA[7&37BBFD20&0&0000]]></usbkbcs:InstanceId>
+		<usbkbcs:Timeout>00:00:05</usbkbcs:Timeout>
+	</Channel>
+
+	<TagGrp name="扫码枪" isEntry="true" isEnabled="true" scanInterval="10">
+		<!-- 引入了自定义的marker特性来标识 -->
+		<Tag name="3#" type="STR" access="RO" channel="USB-3#" marker="UsbScanner"></Tag>
+	</TagGrp>
 
 	<TagGrp name="entry" isEntry="true" isEnabled="true" scanInterval="1" channel="S7-1">
 
@@ -31,6 +42,4 @@
 
 		<!-- additional TagGrp elements can be added here -->
 	</TagGrp>
-
-
 </Project>
