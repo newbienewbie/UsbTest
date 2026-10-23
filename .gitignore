@@ -35,3 +35,4 @@ qodana.yaml
 /.reasonix
 /reasonix.toml
 /Src/packages
+/packages
