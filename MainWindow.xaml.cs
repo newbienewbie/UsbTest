@@ -77,7 +77,7 @@ public partial class MainWindow : Window, IDisposable
             {
                 var newvalue = evt.NewValue;
                 this.txtUsb.Text = newvalue?.ToString();
-                this.txtAck.Foreground = newvalue is true ? Brushes.Green : Brushes.Black;
+                this.txtUsb.Foreground = newvalue is true ? Brushes.Green : Brushes.Black;
             })
             .AddTo(d);
         return d;
